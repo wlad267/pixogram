@@ -15,7 +15,7 @@ export class MediaService {
     formData.append('title', media.title);
     formData.append('description', media.description);
     formData.append('file', media.file,'xxxxxx');
-    
+    formData.append('type', media.type)
 
     const HttpUploadOptions = {
       headers: new HttpHeaders({ "Accept": "application/json" })

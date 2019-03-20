@@ -30,7 +30,6 @@ public class WebServicesMonolithApplication {
         SpringApplication.run(WebServicesMonolithApplication.class, args);
     }
 
-
     @Bean(name = "multipartResolver")
     public StandardServletMultipartResolver multipartResolver() {
         return new StandardServletMultipartResolver();

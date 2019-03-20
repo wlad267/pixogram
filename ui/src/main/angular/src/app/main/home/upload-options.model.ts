@@ -13,6 +13,7 @@ export class MediaInfo {
 
 export class MediaUploadRequest extends MediaInfo { 
     file: File; 
+    type: string;
     constructor() { 
         super();
         this.file = null;

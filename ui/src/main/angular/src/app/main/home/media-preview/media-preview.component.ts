@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { MediaDetails } from '../upload-options.model';
 
 @Component({
   selector: 'app-media-preview',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MediaPreviewComponent implements OnInit {
 
+  @Input() media: MediaDetails;
+  
   constructor() { }
 
   ngOnInit() {

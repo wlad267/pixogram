@@ -26,7 +26,7 @@ public class BlueMediaRepositoryIT extends IntegrationTest {
     public void test_blob_savings(){
         Media testMedia = new Media();
         testMedia.setId(1L);
-        testMedia.setMediaType(MediaType.IMG);
+        testMedia.setMediaType(MediaType.image);
         testMedia.setData("1234".getBytes());
 
         mediaRepository.save(testMedia);

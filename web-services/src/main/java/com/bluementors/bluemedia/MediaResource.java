@@ -31,7 +31,7 @@ public class MediaResource {
 
     @PostMapping("upload")
     public MediaUploadFileResponse saveItem(@ModelAttribute MediaUploadRequest mediaUploadRequest) {
-        logger.info("saving file " + mediaUploadRequest.getFile().getName());
+        logger.info("saving file " + mediaUploadRequest.file.getName());
 
         String fileName = fileStorageService.storeFile(mediaUploadRequest.file);
 

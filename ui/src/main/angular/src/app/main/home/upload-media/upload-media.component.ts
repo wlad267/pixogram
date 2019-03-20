@@ -43,8 +43,12 @@ export class UploadMediaComponent implements OnInit {
     console.log('is Video ' + this.isVideo(fileName));
     console.log('is Image ' + this.isImage(fileName));
 
-    const isValidUploadType = this.isImage(fileName) || this.isVideo(fileName);
-    if (!isValidUploadType){
+    let fileType = null;
+    if (this.isImage(fileName)) {
+      fileType = 'image';
+    } else if (this.isVideo(fileName)){
+      fileType = 'video';
+    } else{
       this.messagingService.error('Selected file type is not suported (Read the user manul - Pixogram supports only to img/png/bmp/jpg avi/mp4/m4v/mpg).')
       return;
     }
@@ -52,7 +56,8 @@ export class UploadMediaComponent implements OnInit {
     // Upload form might become valid only with supported media types
     this.formGroup.patchValue({
         file: file,
-        fileName: fileName
+        fileName: fileName,
+        type: fileType
       });
 
     // Need to run CD since file load runs outside of zone
@@ -62,33 +67,25 @@ export class UploadMediaComponent implements OnInit {
    
   }
 
-  upload() {
-    console.log('uploading');
-  }
-
-  onUpload(event) {
-    for(let file of event.files) {
-        this.uploadedFiles.push(file);
-    }
- }
-
  onSubmit(){
   console.log("submitting:" + JSON.stringify(this.formGroup.value));
-
+  
   this.mediaService.uploadMedia(this.formGroup.value).subscribe(
-    (response)=>{
+    response => {
       console.log('saved' + response);
     },
-    console.error
+    error => {
+      this.messagingService.error(error.message);
+    }
   );
  }
 
- getExtension(filename) {
+ private getExtension(filename) {
   var parts = filename.split('.');
   return parts[parts.length - 1];
  }
 
-isImage(filename) {
+private isImage(filename) {
   var ext = this.getExtension(filename);
   switch (ext.toLowerCase()) {
   case 'jpg':
@@ -101,7 +98,7 @@ isImage(filename) {
   return false;
 }
 
-isVideo(filename) {
+private isVideo(filename) {
   var ext = this.getExtension(filename);
   switch (ext.toLowerCase()) {
   case 'm4v':
