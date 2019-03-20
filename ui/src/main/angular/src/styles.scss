@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+
+header{
+    background-color: darkslateblue;
+    color: white;
+}
+
+footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   padding: 0.5vh;
+   //background-color: darkslateblue;
+   color: white;
+   text-align: center;
+   h2 {
+       font-size: 18px;
+       font-style: italic;
+   }
+   a , a:hover, a:visited {
+       color: white;
+   }
+   
+}
+
+.spinner_container {
+  margin: 45%; 
+}
+
+.on_right {
+    position: absolute; 
+    right: 0;
+}
+
+.col_centered {
+    margin: 0 auto;
+}
+
+.red_border {
+    border-color: red;
+}
+
+
+

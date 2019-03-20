@@ -1,0 +1,46 @@
+<p>
+  upload-media works!
+</p>
+
+<form [formGroup]="formGroup" novalidate>
+
+  <div class="container">
+    <div class="row m-10">
+      <label class="col-md-4"> Title </label>
+      <input formControlName="title" class="col-md-4" type="text">
+    </div>
+    <br>
+    <div class="row m-10">
+      <label class="col-md-4"> Description</label>
+      <textarea formControlName="description" class="col-md-7"></textarea>
+
+    </div>
+    <br>
+    <div class="row m-10">
+      <label class="col-md-4">Tags:</label>
+      <textarea class="col-md-8"></textarea>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-4">
+        <button class="btn btn-green pull-left" (click)="fileBrowser.click()">
+         <label >Select File</label><div style="width: 10px; display: inline-block"></div> <i class="fa fa-upload"></i>
+        </button>
+      </div>
+
+      <div class="col-md-8">
+        <input type="text" readonly formControlName="fileName">
+        <input type="file" #fileBrowser style="display: none" (change)="onFileChange($event)">
+      </div>
+    </div>
+    <br>
+    <div class="row m-10">
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-primary pull-right" (click)="onSubmit()" [disabled]="!formGroup.valid">
+          Upload
+        </button>
+      </div>
+    </div>
+
+  </div>
+</form>
