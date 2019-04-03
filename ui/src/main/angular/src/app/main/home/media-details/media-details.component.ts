@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { MediaDetails } from '../upload-options.model';
+import { MediaStoreService } from '../../services/media-store.service';
 
 @Component({
   selector: 'app-media-details',
@@ -7,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MediaDetailsComponent implements OnInit {
 
-  constructor() { }
+  media: MediaDetails;
+  constructor(private mediaStore: MediaStoreService) { }
 
   ngOnInit() {
+    this.media = this.mediaStore.media;
   }
 
 }

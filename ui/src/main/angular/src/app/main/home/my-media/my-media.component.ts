@@ -16,7 +16,13 @@ export class MyMediaComponent implements OnInit {
   ngOnInit() {
       this.images = [];
       for (let i=0; i<33; i++){
-        this.media.push(new MediaDetails());
+        const  m = new MediaDetails('Bench' + i);
+        if (i%2){
+          m.type ='video';
+        }else{
+          m.type='image';
+        }
+        this.media.push(m);
       }
   }
 

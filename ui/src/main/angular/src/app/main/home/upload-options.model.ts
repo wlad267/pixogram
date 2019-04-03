@@ -2,8 +2,8 @@
 export class MediaInfo {
     fileName: string; 
     title: string;
+    type: string;
     description: string;
-    
     constructor() { 
         this.fileName = ''; 
         this.title = '';
@@ -13,7 +13,7 @@ export class MediaInfo {
 
 export class MediaUploadRequest extends MediaInfo { 
     file: File; 
-    type: string;
+    userId: string;
     constructor() { 
         super();
         this.file = null;
@@ -22,10 +22,11 @@ export class MediaUploadRequest extends MediaInfo {
 
 export class MediaDetails extends MediaInfo { 
     uri: string;
-    constructor() { 
+    constructor(title?: string) { 
         super();
         this.uri = null;
-    } 
+        this.title = title;
+    }     
 }
 
 

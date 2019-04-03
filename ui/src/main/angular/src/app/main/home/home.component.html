@@ -1,30 +1,32 @@
 <div class="container-fluid">
-
   <div class="row">    
-    <div class="col-md-2">
-      <img src="assets/logo.png" style="width: 130px">
-    </div>
 
-    <div class="col-md-10">
-      <div style="margin-top:20px; margin-left: 2%; border:none;">
+    <div class="col-md-12">
+      <div style="margin-top:20px; border:none;">
             <ul>
-            <li class="nav-item"><a class="nav-link" routerLink="./uploadMedia">Upload Media</a></li>
-            <li class="nav-item"><a class="nav-link" routerLink="./myMedia">MyMedia</a></li>
-            <li class="nav-item"><a class="nav-link" routerLink="./follow">Following</a></li>
-            <li class="nav-item"><a class="nav-link" routerLink="./myAccount">Account</a></li>
-            <li style="float:right"><a (click)="logout()">Logout</a></li>
+            <li class="nav-item col-md-4" style=" padding: 10px">
+                <i class="fa fa-camera-retro fa-4x" style="color: white"></i>
+                <h1 style="padding: 10px;display: inline; color: whitesmoke">Pixogram</h1>
+            </li>                
+
+            <li class="nav-item" style="margin-top: 15px"><a class="nav-link" routerLink="./uploadMedia">Upload Media</a></li>
+            <li class="nav-item" style="margin-top: 15px"><a class="nav-link" routerLink="./myMedia">MyMedia</a></li>
+            <li class="nav-item" style="margin-top: 15px"><a class="nav-link" routerLink="./follow">Following/Followers</a></li>
+            <li class="nav-item" style="margin-top: 15px"><a class="nav-link" routerLink="./myAccount">Account</a></li>
+            <li style="margin-top: 15px; float:right"><a (click)="logout()">Logout</a></li>
           </ul>
       </div>
     </div>
-
   </div>
 
 
   <div class="row">
-    <div class="col-md-4"> <img src="assets/generic_profile.png" width="150px" style="margin: 20px"></div>
-    <div class="col-md-4" style="margin: 20px">
-      <p>{{user.firstName}} {{user.lastName}}</p>
-      <p>Welcome to out pixel galaxy!</p> 
+    <div class="col-md-3"> 
+      <img  src="{{user.profilePhoto? user.profilePhoto : 'assets/generic_profile.png'}}" width="150px" style="margin: 20px">
+    </div>
+    <div class="col-md-8" style=" font-size: 1.2rem">
+      <p style="margin-top:30px">Hello {{user.firstName}} {{user.lastName}}</p>
+      <p>Welcome to out pixel galaxy! An enjoyable place in space.</p> 
     </div>
   </div>
 

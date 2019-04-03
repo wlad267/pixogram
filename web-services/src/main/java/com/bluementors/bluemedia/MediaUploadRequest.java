@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.Serializable;
 
 public class MediaUploadRequest implements Serializable {
-
+    public Long userId;
     public String title;
     public String description;
     public MediaType type;
@@ -49,5 +49,13 @@ public class MediaUploadRequest implements Serializable {
 
     public void setFile(MultipartFile file) {
         this.file = file;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

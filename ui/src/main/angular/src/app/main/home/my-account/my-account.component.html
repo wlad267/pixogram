@@ -1,3 +1,49 @@
-<p>
-  my-account works!
-</p>
+<form [formGroup]="formGroup">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-10 offset-md-2">
+        <label class="col-md-3">FirstName:</label>
+        <input formControlName="firstName" class="col-md-5" type="text">
+      </div>
+
+      <div class="col-md-10 offset-md-2">
+        <label  class="col-md-3">LastName:</label>
+        <input formControlName="lastName" class="col-md-5" type="text">
+      </div>
+
+      <div class="col-md-10 offset-md-2">
+        <label class="col-md-3">email:</label>
+        <input class="col-md-5" classtype="text" readonly value="{{user.email}}">
+      </div>
+    </div>
+   
+    <div class="row offset-md-2">
+
+        <div class="col-md-3">
+          <button class="btn btn-primary pull-left" (click)="fileBrowser.click()">
+          <label>Select Image</label>
+          <i style="margin-left:10px" class="fa fa-upload"></i>
+          </button>
+        </div>
+        <div class="col-md-5">
+          <input type="text" class="pull-left" 
+            style="border: none; margin-top: 3px" 
+            readonly 
+            formControlName="fileName" 
+            placeholder="...please select content...">
+          <input type="file" #fileBrowser style="display: none" (change)="onFileChange($event)">
+        </div>
+  
+      </div>
+
+    <div class="row offset-md-2">
+      <div class="col-md-10">
+        <button 
+            style="display: block; width: 100%; height: 50px;" 
+            class="btn btn-primary pull-right"
+            (click)="onSubmit()" [disabled]="!formGroup.valid">Save</button>
+      </div>
+    </div>
+  </div>
+</form>

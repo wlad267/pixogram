@@ -6,37 +6,41 @@
 
   <div class="container">
     <div class="row m-10">
-      <label class="col-md-4"> Title </label>
+      <label class="col-md-3 offset-md-2"> Title </label>
       <input formControlName="title" class="col-md-4" type="text">
     </div>
     <br>
     <div class="row m-10">
-      <label class="col-md-4"> Description</label>
-      <textarea formControlName="description" class="col-md-7"></textarea>
+      <label class="col-md-3 offset-md-2"> Description</label>
+      <textarea formControlName="description" class="col-md-6"></textarea>
 
     </div>
     <br>
     <div class="row m-10">
-      <label class="col-md-4">Tags:</label>
-      <textarea class="col-md-8"></textarea>
+      <label class="col-md-3 offset-md-2">Tags:</label>
+      <textarea class="col-md-6"></textarea>
     </div>
     <br>
-    <div class="row">
-      <div class="col-md-4">
-        <button class="btn btn-green pull-left" (click)="fileBrowser.click()">
-         <label >Select File</label><div style="width: 10px; display: inline-block"></div> <i class="fa fa-upload"></i>
+    
+    <div class="row m-10">
+
+      <div class="col-md-3 offset-md-2">
+        <button class="btn btn-primary pull-left" (click)="fileBrowser.click()">
+        <label>Select File</label>
+        <i style="margin-left:10px" class="fa fa-upload"></i>
         </button>
       </div>
-
-      <div class="col-md-8">
-        <input type="text" readonly formControlName="fileName">
+      <div class="col-md-6">
+        <input type="text" class="pull-left" style="border: none; margin-top: 3px" readonly formControlName="fileName" placeholder="...please select content...">
         <input type="file" #fileBrowser style="display: none" (change)="onFileChange($event)">
       </div>
+
     </div>
+
     <br>
     <div class="row m-10">
-      <div class="col-md-12">
-        <button type="submit" class="btn btn-primary pull-right" (click)="onSubmit()" [disabled]="!formGroup.valid">
+      <div class="col-md-10 offset-md-2">
+        <button type="submit" style=" width: 100%; height: 50px" class="btn btn-primary pull-right" (click)="onSubmit()" [disabled]="!formGroup.valid">
           Upload
         </button>
       </div>

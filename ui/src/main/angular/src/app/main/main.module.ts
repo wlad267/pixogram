@@ -32,9 +32,11 @@ import { GalleriaModule } from 'primeng/galleria';
 import { MediaService } from './services/media.service';
 import { MediaPreviewComponent } from './home/media-preview/media-preview.component';
 import { MediaDetailsComponent } from './home/media-details/media-details.component';
+import {CardModule} from 'primeng/card';
+import { UserSummaryComponent } from './home/follow/user-summary/user-summary.component';
 
 @NgModule({
-  declarations: [HomeComponent, UploadMediaComponent, MyMediaComponent, FollowComponent, MyAccountComponent, MediaPreviewComponent, MediaDetailsComponent],
+  declarations: [HomeComponent, UploadMediaComponent, MyMediaComponent, FollowComponent, MyAccountComponent, MediaPreviewComponent, MediaDetailsComponent, UserSummaryComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -57,7 +59,9 @@ import { MediaDetailsComponent } from './home/media-details/media-details.compon
     AccordionModule,
     RatingModule,
     StepsModule,
-    GalleriaModule
+    GalleriaModule,
+    CardModule
+
   ],
   exports: [HomeComponent, RouterModule],
   providers: [UserService, MediaService]

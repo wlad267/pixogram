@@ -3,6 +3,7 @@ import { MediaUploadRequest } from '../upload-options.model';
 import { Validators, FormBuilder } from '@angular/forms';
 import { MediaService } from '../../services/media.service';
 import { MessagingService } from '../../../core/messaging/messaging.service';
+import { User } from '../user.model';
 
 
 @Component({
@@ -11,9 +12,8 @@ import { MessagingService } from '../../../core/messaging/messaging.service';
   styleUrls: ['./upload-media.component.scss']
 })
 export class UploadMediaComponent implements OnInit {
-
+  user: User;
   uploadOptions: MediaUploadRequest;
-
   uploadedFiles: any[] = [];
 
   formGroup = this.formBuilder.group({
@@ -21,7 +21,8 @@ export class UploadMediaComponent implements OnInit {
     fileName: [''],
     title: ['', Validators.required],
     description: [''],
-    type: []
+    type: [],
+    userId: []
 });
 
   constructor(private formBuilder: FormBuilder,  
@@ -31,6 +32,10 @@ export class UploadMediaComponent implements OnInit {
 
   ngOnInit() {
     this.uploadOptions = new MediaUploadRequest();
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.formGroup.patchValue({
+      userId: this.user.id
+    });
   }
 
   onFileChange(event) { ;

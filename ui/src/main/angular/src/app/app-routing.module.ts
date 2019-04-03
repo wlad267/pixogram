@@ -8,6 +8,7 @@ import { MyAccountComponent } from './main/home/my-account/my-account.component'
 import { UploadMediaComponent } from './main/home/upload-media/upload-media.component';
 import { FollowComponent } from './main/home/follow/follow.component';
 import { MyMediaComponent } from './main/home/my-media/my-media.component';
+import { MediaDetailsComponent } from './main/home/media-details/media-details.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard],
@@ -16,6 +17,8 @@ const appRoutes: Routes = [
     { path: 'myMedia', component: MyMediaComponent },
     { path: 'follow', component: FollowComponent },
     { path: 'myAccount', component: MyAccountComponent },
+    { path: 'mediaDetails', component: MediaDetailsComponent },
+    
     { path: '**', redirectTo: 'myMedia' }
     ] 
   },

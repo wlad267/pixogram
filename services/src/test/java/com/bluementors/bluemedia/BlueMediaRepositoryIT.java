@@ -27,7 +27,7 @@ public class BlueMediaRepositoryIT extends IntegrationTest {
         Media testMedia = new Media();
         testMedia.setId(1L);
         testMedia.setMediaType(MediaType.image);
-        testMedia.setData("1234".getBytes());
+
 
         mediaRepository.save(testMedia);
         entityManager.flush();
@@ -40,9 +40,9 @@ public class BlueMediaRepositoryIT extends IntegrationTest {
 
         Media savedMedia = media.get(0);
 
-        assertThat(savedMedia)
-                .extracting(Media::getData)
-                .isEqualTo("1234".getBytes());
+//        assertThat(savedMedia)
+//                .extracting(Media::getData)
+//                .isEqualTo("1234".getBytes());
 
 
     }

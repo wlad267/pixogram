@@ -1,3 +1,8 @@
-<p>
-  follow works!
-</p>
+<div class="container ">
+    <div class="row">
+      <div class="col-md-3" *ngFor="let u of users">
+        <br>
+        <app-user-summary style="margin-top: 100px" [user]="u"></app-user-summary>
+      </div>
+    </div>
+  </div>

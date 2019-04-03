@@ -3,6 +3,7 @@ import { AuthenticationService } from '../../core/authetication/authentication.s
 import {MenuItem} from 'primeng/api';
 import { User } from './user.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 
 @Component({
@@ -23,51 +24,20 @@ export class HomeComponent implements OnInit {
   activTabMenuItem: MenuItem;
   showTabMenu = true;
 
-  private user: User
-  
-  /**
-   * Handlers for the tab menu
-   */
-  onSkills: any;
-  onMentors: any;
-  onUsers: any;
-  onTrainings: any;
-  onStatistics: any;
-  
+  private user: User;
 
   constructor(private authenticationSevice: AuthenticationService,
              private router:Router, 
-             private route: ActivatedRoute) { 
+             private route: ActivatedRoute,
+             private userService: UserService) { }
 
-              this.onSkills = function(event) {
-                router.navigate(['/home/skills'] );
-              };
-
-              this.onMentors = function(event) {
-                router.navigate(['/home/mentors'] );
-              };
-
-              this.onUsers = function(event) {
-                router.navigate(['/home/users'] );
-              };
-
-              this.onTrainings = function(event) {
-                router.navigate(['/home/trainings'] );
-              };
-
-              this.onStatistics = function(event) {
-                router.navigate(['/home/statistics'] );
-              };
-
-             }
-
-  ngOnInit() {
-    
+  ngOnInit() {    
     this.user = JSON.parse(localStorage.getItem('currentUser'));
-
     console.log('current user ' + JSON.stringify(this.user));
-    
-
+    this.userService.userChangeSubject.subscribe(()=>{
+      this.user = JSON.parse(localStorage.getItem('currentUser'));
+      console.log('received user change notification' + JSON.stringify(this.user));
+    });
   }
 
   logout(){
