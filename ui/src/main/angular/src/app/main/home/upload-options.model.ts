@@ -1,5 +1,6 @@
 
 export class MediaInfo {
+    id?:string;
     fileName: string; 
     title: string;
     type: string;

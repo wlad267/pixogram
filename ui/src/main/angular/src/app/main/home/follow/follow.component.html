@@ -1,8 +1,24 @@
+
 <div class="container ">
-    <div class="row">
-      <div class="col-md-3" *ngFor="let u of users">
+  <div class="row">
+    <div class="col-md-2">
+      <ul>
+        <li>
+            <a class="submenu" (click)="changeTo('all')">all</a>
+        </li>
+        <li>
+            <a (click)="changeTo('following')">following</a> 
+        </li>
+        <li>
+            <a (click)="changeTo('followers')">followers</a> 
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-10">
+      <div class="col-md-3" style="display: inline-block; margin: 0; padding: 0; border: 0;" *ngFor="let u of users">
         <br>
         <app-user-summary style="margin-top: 100px" [user]="u"></app-user-summary>
       </div>
     </div>
   </div>
+</div>

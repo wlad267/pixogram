@@ -5,10 +5,13 @@ import com.bluementors.user.Media;
 import com.bluementors.user.User;
 import com.bluementors.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -52,8 +55,6 @@ public class UsersResource {
 
 
 
-
-
     @PostMapping("update")
     @Transactional
     //TODO cheeck this out -- applicative transation rollback
@@ -76,4 +77,15 @@ public class UsersResource {
     }
 
 
+    @PostMapping("follow/{followedUserId}")
+    public ResponseEntity follow(@PathVariable("followedUserId") Long followedUserId, Principal principal){
+        this.userService.follow(principal.getName(), followedUserId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("unfollow/{followedUserId}")
+    public ResponseEntity unfollow(@PathVariable("followedUserId") Long followedUserId, Principal principal){
+        this.userService.unfollow(principal.getName(), followedUserId);
+        return ResponseEntity.ok().build();
+    }
 }

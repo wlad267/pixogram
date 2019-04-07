@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaDetails } from '../upload-options.model';
+import { ActivatedRoute } from '@angular/router';
+import { MediaService } from '../../services/media.service';
+import { User } from '../user.model';
 
 @Component({
   selector: 'app-my-media',
@@ -8,22 +11,37 @@ import { MediaDetails } from '../upload-options.model';
 })
 export class MyMediaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute, private mediaService: MediaService) { 
+  }
 
   images: any[];
   media: MediaDetails[] = [];
-    
+  userId: number;
+  loggedUser: User;
+
   ngOnInit() {
-      this.images = [];
-      for (let i=0; i<33; i++){
-        const  m = new MediaDetails('Bench' + i);
-        if (i%2){
-          m.type ='video';
-        }else{
-          m.type='image';
-        }
-        this.media.push(m);
-      }
+
+    this.activatedRoute.params.subscribe(params =>{
+      console.log('userId parameter ' + params);
+      this.userId = params.userId;
+      this.fetchGalery(params.userId);
+    });
+
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));  
   }
+
+  deleteMedia(media){
+    this.media.splice(this.media.indexOf(media), 1);
+  }
+
+  private fetchGalery(userId){
+    this.mediaService.fetchGallery(userId).subscribe(
+      gallery=> {
+        this.media = gallery;
+      },
+      console.error
+    );
+  }
+
 
 }

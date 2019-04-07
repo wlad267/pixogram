@@ -1,5 +1,8 @@
 package com.bluementors.bluemedia.filestorage;
 
+import com.bluementors.exception.BusinessException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -17,10 +20,15 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class FileStorageService {
 
+    private Logger logger = LoggerFactory.getLogger(FileStorageService.class);
+
     private final Path fileStorageLocation;
+
+    FileStorageProperties fileStorageProperties;
 
     @Autowired
     public FileStorageService(FileStorageProperties fileStorageProperties) {
+        this.fileStorageProperties = fileStorageProperties;
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
                 .toAbsolutePath().normalize();
 
@@ -62,6 +70,16 @@ public class FileStorageService {
             }
         } catch (MalformedURLException ex) {
             throw new MyFileNotFoundException("File not found " + fileName, ex);
+        }
+    }
+
+    public void deleteFile(String fileName) {
+        Path fileToDeletePath = Paths.get(fileStorageProperties.getUploadDir().concat("/").concat(fileName));
+        try {
+            Files.delete(fileToDeletePath);
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+            throw new BusinessException("error deleting file " + fileName + e.getMessage());
         }
     }
 }

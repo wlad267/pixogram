@@ -1,19 +1,22 @@
 package com.bluementors.user;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "COMMENTS")
+@SequenceGenerator(name = "comment_seq", initialValue = 10, allocationSize = 1000000)
 public class Comment {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comment_seq")
     private Long id;
     private String value;
+    @JsonIgnore
     @OneToOne
     private User user;
+    @JsonIgnore
     @OneToOne
     private Media media;
 

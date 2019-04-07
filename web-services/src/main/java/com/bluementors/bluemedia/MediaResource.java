@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,14 +44,12 @@ public class MediaResource {
 
         User user = userService.findById(mediaUploadRequest.getUserId());
 
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("api/media/downloadFile/")
-                .path(fileName)
-                .toUriString();
+        String fileDownloadUri = "api/media/downloadFile/".concat(fileName);
 
         Media media = new Media.Builder()
                 .type(mediaUploadRequest.type)
                 .downloadUri(fileDownloadUri)
+                .fileName(fileName)
                 .build();
 
         user.addMedia(media);
@@ -61,8 +60,16 @@ public class MediaResource {
                 mediaUploadRequest.file.getContentType(), mediaUploadRequest.file.getSize());
     }
 
+    @PostMapping("delete/{mediaId}")
+    public ResponseEntity delete(@PathVariable("mediaId") Long mediaId){
+        Media media = mediaService.findById(mediaId);
+        fileStorageService.deleteFile(media.getFileName());
+        return ResponseEntity.ok().build();
+    }
+
+
     @GetMapping(value = "gallery/{userId}")
-    public List<Media> fetchGalery(@PathParam("userId") Long userId) {
+    public List<Media> fetchGalery(@PathVariable("userId") Long userId) {
         return mediaService.fetchMediaByUser(userId);
     }
 
@@ -93,5 +100,20 @@ public class MediaResource {
     @GetMapping("{userId}")
     public List<Media> loadMedia(@PathVariable Long userId) {
         return userService.findById(userId).getMedia();
+    }
+
+    @PostMapping("/like/{mediaId}")
+    public Media likeMedia(@PathVariable Long mediaId){
+        return mediaService.likeMedia(mediaId);
+    }
+
+    @PostMapping("/dislike/{mediaId}")
+    public Media dislikeMedia(@PathVariable Long mediaId){
+        return mediaService.dislikeMedia(mediaId);
+    }
+
+    @PostMapping("/comment/{mediaId}")
+    public Media addComment(@PathVariable("mediaId") Long mediaId, @RequestBody MediaComment comment){
+        return mediaService.comment(mediaId, comment.comment);
     }
 }

@@ -1,7 +1,7 @@
 package com.bluementors.users;
 
 public class UserSummaryRepresentation {
-    public Long userId;
+    public Long id;
     public String profileImageUri;
     public String firstName;
     public String lastName;
@@ -19,7 +19,7 @@ public class UserSummaryRepresentation {
         }
 
         public Builder userId(Long userId){
-            this.userSummaryRepresentation.userId = userId;
+            this.userSummaryRepresentation.id = userId;
             return this;
         }
 

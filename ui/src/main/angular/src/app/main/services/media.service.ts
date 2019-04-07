@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MediaUploadRequest } from '../home/upload-options.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class MediaService {
     
     formData.append('title', media.title);
     formData.append('description', media.description);
-    formData.append('file', media.file,'xxxxxx');
+    formData.append('file', media.file,media.fileName);
     formData.append('type', media.type);
     formData.append('userId', media.userId);
 
@@ -24,5 +25,17 @@ export class MediaService {
     }
 
     return this.httpClient.post('api/media/upload', formData, HttpUploadOptions);
+  }
+
+  fetchGallery(userId): Observable<any> {
+    return this.httpClient.get(`api/media/gallery/${userId}`);
+  }
+
+  deleteMedia(mediaId) {
+    return this.httpClient.post(`api/media/delete/${mediaId}`, {});
+  }
+
+  addComment(commentV, mediaId): Observable<any>{
+     return this.httpClient.post(`api/media/comment/${mediaId}`, {comment: commentV})
   }
 }

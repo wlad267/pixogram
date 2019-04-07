@@ -14,7 +14,7 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard],
   children: [
     { path: 'uploadMedia', component: UploadMediaComponent },
-    { path: 'myMedia', component: MyMediaComponent },
+    { path: 'myMedia/:userId', component: MyMediaComponent },
     { path: 'follow', component: FollowComponent },
     { path: 'myAccount', component: MyAccountComponent },
     { path: 'mediaDetails', component: MediaDetailsComponent },

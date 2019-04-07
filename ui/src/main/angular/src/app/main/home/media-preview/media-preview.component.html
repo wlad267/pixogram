@@ -1,26 +1,41 @@
-<p-card (click)="showMediaDetails()">
-    <p-header>
+<p-card>
+    <p-header class="onM" (click)="showMediaDetails()">
         <h5 style="text-align: center">{{media.title}}</h5>
         <div class="container">
             <div class="row">
-                <div class="col-md-4">44<i class="fa fa-thumbs-up"></i> </div>
-                <div class="col-md-4">33<i class="fa fa-thumbs-down"></i></div>
-                <div class="col-md-4">5<i class="fa fa-comments"></i></div>
+                <div class="col-md-4">{{media.likesCount}}
+                    <i class="fa fa-thumbs-up"></i>
+                </div>
+                <div class="col-md-4">0
+                    <i class="fa fa-thumbs-down"></i>
+                </div>
+                <div class="col-md-4">{{media.comments.length}}
+                    <i class="fa fa-comments"></i>
+                </div>
             </div>
-         </div>
+        </div>
     </p-header>
-    <img *ngIf="media.type==='image'" style="margin: auto" src="assets/generic_profile.png" width="100%" >
-    <img *ngIf="media.type==='video'" style="margin: auto" src="assets/video.png" width="100%" >
+    <article style="height: 200px; vertical-align: center">
+        <img class="onM" (click)="showMediaDetails()" *ngIf="media.mediaType==='image'" 
+            style="margin: auto;height: 100%;vertical-align: center" src="{{media.downloadUri}}"
+            width="100%">
+
+        <video *ngIf="media.mediaType==='video'" class="onM" (click)="showMediaDetails()" style="height: 100%; margin: auto; vertical-align: middle" src="{{media.downloadUri}}"
+            width="100%"></video>
+    </article>
     <p-footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-3">Follow</div>
-                <div class="col-md-1"><i class="fa fa-plus-circle"></i></div>
-                <div class="col-md-4">Unfollow</div>
-                <div class="col-md-1"><i class="fa fa-minus-circle"></i></div>
+                <div class="col-md-3 onM">Follow</div>
+                <div class="col-md-1">
+                    <i class="fa fa-plus-circle"></i>
+                </div>
+
+                <div class="col-md-1 pull-right" (click)="delete()">
+                    <i class="fa  fa-trash"></i>
+                </div>
+
             </div>
-          </div>
+        </div>
     </p-footer>
 </p-card>
-
-

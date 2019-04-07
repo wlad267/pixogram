@@ -1,8 +1,8 @@
-<div class="container ">
+<div class="container">
   <div class="row">
     <div class="col-md-3" *ngFor="let m of media">
       <br>
-      <app-media-preview style="margin-top: 100px" [media]="m"></app-media-preview>
+      <app-media-preview style="margin-top: 100px; width: 100%;height: 100%;" [media]="m" (deletion)="deleteMedia(m)"></app-media-preview>
     </div>
   </div>
 </div>

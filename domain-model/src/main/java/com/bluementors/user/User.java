@@ -123,6 +123,10 @@ public class User implements Serializable {
         this.media.add(media);
     }
 
+    public void follow(User user){
+        this.follow.add(user);
+    }
+
     public void setMedia(List<Media> media) {
         this.media = media;
     }

@@ -33,4 +33,12 @@ export class UserService {
 
   }
 
+
+  getAllUsers():Observable<any> {
+    return this.httpClient.get('api/users/all');
+  }
+
+  getFollowers(){
+    return this.httpClient.get('api/users/all');
+  }
 }

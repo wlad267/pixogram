@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user.model';
+import { UserService } from '../../services/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-follow',
@@ -9,16 +11,32 @@ import { User } from '../user.model';
 export class FollowComponent implements OnInit {
 
   users: User[];
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.users = [];
-    for (let i=0; i<33; i++){
-      const  u = new User();
-      u.firstName = 'Gigi ' + i;
-      u.id =i;
-      this.users.push(u);
+    this.fetchAllUsers();    
+  }
+
+  changeTo(view){
+    switch (view) {
+      case 'all':
+        console.log('get all users');
+        this.fetchAllUsers();
+      break;
+      case 'followers':
+      console.log('get followers');
+      break;
+      case 'following':
+        console.log('get following');
+      break;
     }
   }
 
+
+  private fetchAllUsers(){
+    this.userService.getAllUsers().subscribe(
+      users => this.users = users,
+      console.error
+    );
+  }
 }

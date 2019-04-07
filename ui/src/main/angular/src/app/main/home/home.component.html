@@ -10,7 +10,7 @@
             </li>                
 
             <li class="nav-item" style="margin-top: 15px"><a class="nav-link" routerLink="./uploadMedia">Upload Media</a></li>
-            <li class="nav-item" style="margin-top: 15px"><a class="nav-link" routerLink="./myMedia">MyMedia</a></li>
+            <li class="nav-item" style="margin-top: 15px"><a class="nav-link" routerLink="./myMedia/{{user.id}}">MyMedia</a></li>
             <li class="nav-item" style="margin-top: 15px"><a class="nav-link" routerLink="./follow">Following/Followers</a></li>
             <li class="nav-item" style="margin-top: 15px"><a class="nav-link" routerLink="./myAccount">Account</a></li>
             <li style="margin-top: 15px; float:right"><a (click)="logout()">Logout</a></li>

@@ -21,7 +21,9 @@ public class Media {
 
     private int likesCount;
 
-    @OneToMany
+    private String fileName;
+
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Comment> comments = new ArrayList<>();
 
     public Long getId() {
@@ -64,12 +66,25 @@ public class Media {
         this.likesCount = likesCount;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
     public boolean isImage(){
         return MediaType.image.equals(this.mediaType);
     }
 
     public boolean isVideo(){
         return MediaType.video.equals(this.mediaType);
+    }
+
+    public void addCommnet(Comment comment){
+        this.comments.add(comment);
+        comment.setMedia(this);
     }
 
     @Override
@@ -114,6 +129,11 @@ public class Media {
 
         public Builder downloadUri(String downloadUri){
             this.media.downloadUri = downloadUri;
+            return this;
+        }
+
+        public Builder fileName(String fileName){
+            this.media.fileName = fileName;
             return this;
         }
 
