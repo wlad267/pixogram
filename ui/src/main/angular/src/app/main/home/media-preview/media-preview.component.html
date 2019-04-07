@@ -3,11 +3,18 @@
         <h5 style="text-align: center">{{media.title}}</h5>
         <div class="container">
             <div class="row">
-                <div class="col-md-4">{{media.likesCount}}
-                    <i class="fa fa-thumbs-up"></i>
+                <div class="col-md-4 hl">
+                    <div style="width: 100%;">
+                            {{media.likesCount}}
+                            <i class="fa fa-thumbs-up"></i>
+                    </div>
+                    
                 </div>
-                <div class="col-md-4">0
+                <div class="col-md-4 hl">
+                        <div style="width: 100%;">
+                    0
                     <i class="fa fa-thumbs-down"></i>
+                    </div>
                 </div>
                 <div class="col-md-4">{{media.comments.length}}
                     <i class="fa fa-comments"></i>
@@ -25,8 +32,8 @@
     </article>
     <p-footer>
         <div class="container">
-            <div class="row">
-                <div class="col-md-3 onM">Follow</div>
+            <div class="row onM">
+                <div class="col-md-3 hl">Follow</div>
                 <div class="col-md-1">
                     <i class="fa fa-plus-circle"></i>
                 </div>

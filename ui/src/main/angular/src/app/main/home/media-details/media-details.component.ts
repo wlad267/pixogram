@@ -21,6 +21,14 @@ export class MediaDetailsComponent implements OnInit {
 
   like(){
     console.log('like');
+    this.mediaService.likeMedia(this.media.id)
+        .subscribe(media=> {this.media = media;}, console.error);
+  }
+
+  dislike(){
+    console.log('like');
+    this.mediaService.dislikeMedia(this.media.id)
+        .subscribe(media=> {this.media = media;}, console.error);
   }
 
   doChange(event){
@@ -29,7 +37,8 @@ export class MediaDetailsComponent implements OnInit {
 
   addComment(){
     this.mediaService.addComment(this.commnet, this.media.id)
-        .subscribe(media=> {this.media = media;}, console.error);
+        .subscribe(media=> {this.media = media;
+        }, console.error);
   }
 
 }

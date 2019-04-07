@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -88,4 +89,15 @@ public class UsersResource {
         this.userService.unfollow(principal.getName(), followedUserId);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("follow")
+    public List<User> getFollowers(Principal user){
+        return new ArrayList(userService.findByEmail(user.getName()).getFollowers());
+    }
+
+    @GetMapping("following")
+    public List<User> getFollowing(Principal user){
+        return new ArrayList(userService.findByEmail(user.getName()).getFollow());
+    }
+
 }

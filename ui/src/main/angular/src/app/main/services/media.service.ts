@@ -35,6 +35,14 @@ export class MediaService {
     return this.httpClient.post(`api/media/delete/${mediaId}`, {});
   }
 
+  likeMedia(mediaId): Observable<any>{
+    return this.httpClient.post(`api/media/like/${mediaId}`, {});
+  }
+
+  dislikeMedia(mediaId): Observable<any>{
+    return this.httpClient.post(`api/media/dislike/${mediaId}`, {});
+  }
+
   addComment(commentV, mediaId): Observable<any>{
      return this.httpClient.post(`api/media/comment/${mediaId}`, {comment: commentV})
   }

@@ -25,8 +25,10 @@ export class FollowComponent implements OnInit {
       break;
       case 'followers':
       console.log('get followers');
+        this.fetchFollow();
       break;
       case 'following':
+        this.fetchFollowing();
         console.log('get following');
       break;
     }
@@ -35,6 +37,20 @@ export class FollowComponent implements OnInit {
 
   private fetchAllUsers(){
     this.userService.getAllUsers().subscribe(
+      users => this.users = users,
+      console.error
+    );
+  }
+
+  private fetchFollow(){
+    this.userService.getFollowers().subscribe(
+      users => this.users = users,
+      console.error
+    );
+  }
+
+  private fetchFollowing(){
+    this.userService.getFollowing().subscribe(
       users => this.users = users,
       console.error
     );

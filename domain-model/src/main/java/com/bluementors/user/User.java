@@ -1,13 +1,13 @@
 package com.bluementors.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "USERS")
@@ -28,10 +28,12 @@ public class User implements Serializable {
     private String contactNo;
     @OneToMany(cascade = {CascadeType.ALL})
     private List<Media> media = new ArrayList<>();
-    @OneToMany
-    private List<User> follow = new ArrayList<>();
-    @OneToMany
-    private List<User> followers = new ArrayList<>();
+    @JsonIgnore
+    @ManyToMany
+    private Set<User> follow = new HashSet<>();
+    @ManyToMany
+    @JsonIgnore
+    private Set<User> followers = new HashSet<>();
 
     private String profilePhoto;
 
@@ -125,25 +127,26 @@ public class User implements Serializable {
 
     public void follow(User user){
         this.follow.add(user);
+        user.getFollowers().add(this);
     }
 
     public void setMedia(List<Media> media) {
         this.media = media;
     }
 
-    public List<User> getFollow() {
+    public Set<User> getFollow() {
         return follow;
     }
 
-    public void setFollow(List<User> follow) {
+    public void setFollow(Set<User> follow) {
         this.follow = follow;
     }
 
-    public List<User> getFollowers() {
+    public Set<User> getFollowers() {
         return followers;
     }
 
-    public void setFollowers(List<User> followers) {
+    public void setFollowers(Set<User> followers) {
         this.followers = followers;
     }
 
@@ -175,24 +178,12 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(authenticationString, user.authenticationString) &&
-                Objects.equals(firstName, user.firstName) &&
-                Objects.equals(lastName, user.lastName) &&
-                Objects.equals(contactNo, user.contactNo) &&
-                Objects.equals(media, user.media) &&
-                Objects.equals(follow, user.follow) &&
-                Objects.equals(followers, user.followers) &&
-                Objects.equals(profilePhoto, user.profilePhoto) &&
-                Objects.equals(registrationDate, user.registrationDate) &&
-                Objects.equals(registrationCode, user.registrationCode) &&
-                Objects.equals(active, user.active);
+        return Objects.equals(id, user.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, authenticationString, firstName, lastName, contactNo, media, follow, followers, profilePhoto, registrationDate, registrationCode, active);
+        return Objects.hash(id);
     }
 
     public static class Builder {

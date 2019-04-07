@@ -49,7 +49,7 @@ public class UserService {
                 follower.getFollow()
                         .stream()
                         .filter(u-> !u.getId().equals(followedUserId))
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toSet())
         );
     }
 }

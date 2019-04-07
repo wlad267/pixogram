@@ -38,7 +38,15 @@ export class UserService {
     return this.httpClient.get('api/users/all');
   }
 
-  getFollowers(){
-    return this.httpClient.get('api/users/all');
+  follow(userId){
+    return this.httpClient.post(`api/users/follow/${userId}`, {});
   }
+  getFollowers():Observable<any> {
+    return this.httpClient.get('api/users/follow');
+  }
+
+  getFollowing():Observable<any> {
+    return this.httpClient.get('api/users/following');
+  }
+
 }
