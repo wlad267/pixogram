@@ -31,7 +31,7 @@ export class FollowComponent implements OnInit {
         this.fetchFollowing();
         console.log('get following');
       break;
-    }
+    } 
   }
 
 
